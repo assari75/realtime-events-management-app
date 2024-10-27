@@ -1,0 +1,42 @@
+.events-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.events-list {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+}
+
+.events-list h2 {
+    color: #1f2937;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Scrollbar styling */
+.events-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.events-list::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 4px;
+}
+
+.events-list::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.events-list::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
