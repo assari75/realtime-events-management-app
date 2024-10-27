@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import { useWebSocket } from '../hooks/useWebSocket';
+import { BASE_URL } from '../config/defaultValues'
 import './EventDetail.css';
 
 const EventDetail = ({ eventID }) => {
@@ -55,7 +56,7 @@ const EventDetail = ({ eventID }) => {
       setError(null);
       
       try {
-        const response = await fetch(`http://localhost:8000/events/${eventID}`);
+        const response = await fetch(`${BASE_URL}/events/${eventID}`);
         if (!response.ok) {
           throw new Error('Failed to fetch event details');
         }

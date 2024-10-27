@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useWebSocket } from '../hooks/useWebSocket';
+import { BASE_URL } from '../config/defaultValues'
 import EventCard from './EventCard';
 import EventDetail from './EventDetail';
 import './EventsList.css';
@@ -41,7 +42,7 @@ const EventsList = () => {
   useWebSocket(handleWebSocketMessage);
 
   useEffect(() => {
-    fetch('http://localhost:8000/events/')
+    fetch(`${BASE_URL}/events/`)
       .then(res => res.json())
       .then(data => setEvents(data));
   }, []);

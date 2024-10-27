@@ -1,3 +1,5 @@
+import { WEBSOCKET_BASE_URL } from '../config/defaultValues'
+
 class WebSocketService {
     constructor() {
       this.ws = null;
@@ -5,7 +7,7 @@ class WebSocketService {
     }
   
     connect() {
-      this.ws = new WebSocket('ws://localhost:8000/ws');
+      this.ws = new WebSocket(`${WEBSOCKET_BASE_URL}/ws`);
   
       this.ws.onmessage = (event) => {
         const data = JSON.parse(event.data);
