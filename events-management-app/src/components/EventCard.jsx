@@ -16,7 +16,7 @@ const EventCard = ({ event, isSelected, onClick }) => {
       <div className="event-info">
         <p>
           <span className="icon">🕒</span>
-          {new Date(event.date_time).toLocaleString()}
+          {event.date_time}
         </p>
         <p>
           <span className="icon">📍</span>

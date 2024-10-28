@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import { useWebSocket } from '../hooks/useWebSocket';
+import { useWebSocket } from '../services/websocket';
 import { BASE_URL } from '../config/defaultValues'
 import './EventDetail.css';
 
@@ -11,18 +11,19 @@ const EventDetail = ({ eventID }) => {
   const handleWebSocketMessage = useCallback((message) => {
     if (!event) return;
 
-    const type = message.type;
-    const data = message.data;
+    const message_data = JSON.parse(message.data)
+    const type = message_data.type;
+    const data = message_data.data;
 
     switch (type) {
       case 'event_canceled':
         if (data.id === eventID) {
-          setEvent(prev => ({ ...prev, is_canceled: true }));
+          setEvent(prev => ({ ...prev, is_cancelled: true }));
         }
         break;
 
       case 'joined_event':
-        if (data.event_id === eventID) {
+        if (data.id === eventID) {
           setEvent(prev => {
             const updatedParticipants = [...(prev.participants || []), {
               id: data.participant.id,
@@ -34,7 +35,7 @@ const EventDetail = ({ eventID }) => {
         break;
 
       case 'left_event':
-        if (data.event_id === eventID) {
+        if (data.id === eventID) {
           setEvent(prev => {
             const updatedParticipants = (prev.participants || []).filter(
               participant => participant.id !== data.participant.id

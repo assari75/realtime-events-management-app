@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useWebSocket } from '../hooks/useWebSocket';
+import { useWebSocket } from '../services/websocket';
 import { BASE_URL } from '../config/defaultValues'
 import EventCard from './EventCard';
 import EventDetail from './EventDetail';
@@ -10,8 +10,9 @@ const EventsList = () => {
   const [selectedEventID, setSelectedEventID] = useState(null);
 
   const handleWebSocketMessage = useCallback((message) => {
-    const type = message.type;
-    const data = message.data;
+    const message_data = JSON.parse(message.data)
+    const type = message_data.type;
+    const data = message_data.data;
     switch (type) {
       case 'event_created':
         setEvents(prevEvents => {
